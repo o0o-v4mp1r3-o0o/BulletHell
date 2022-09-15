@@ -17,6 +17,8 @@ namespace BulletHell
         private float bulletSpeed;
         private float direction;
         private float x, y;
+        private Collision collision;
+        private bool isOffscreen;
 
         public Bullet(float damage, Vector2 bulletPosition, float bulletSpeed, float direction)
         {
@@ -31,9 +33,25 @@ namespace BulletHell
         public Texture2D BulletTexture { get => bulletTexture; set => bulletTexture = value; }
         public Vector2 BulletPosition { get => bulletPosition; set => bulletPosition = value; }
         public float BulletSpeed { get => bulletSpeed; set => bulletSpeed = value; }
+        public Collision Collision { get => collision; set => collision = value; }
+        public bool IsOffscreen { get => isOffscreen; set => isOffscreen = value; }
 
+        public void addCollision()
+        {
+            collision = new Collision(bulletPosition.X, bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
 
+        }
 
+        public void update(int screenWidth, int screenHeight, Bullet bullet, List<Collision> checkCollidedEntities, List<Bullet> bullets)
+        {
+            collision.updateBounds(bulletPosition.X, bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
+            if ((bulletPosition.X > screenWidth) || (bulletPosition.X < bulletTexture.Width / 2) || 
+                    (bulletPosition.Y > screenHeight) || (bulletPosition.Y < bulletTexture.Height / 2))
+            {
+                isOffscreen = true;
+            }
+            
+        }
         public void draw(SpriteBatch _spriteBatch)
         {
             _spriteBatch.Draw(
@@ -68,6 +86,13 @@ namespace BulletHell
                 x = (float)Math.Cos(360 - direction) * bulletSpeed;
                 y = (float)Math.Sin(360 - direction) * bulletSpeed;
             }
+        }
+
+        public void destroySelf(Bullet bullet, List<Collision> checkCollidedEntities, List<Bullet> bullets)
+        {
+            checkCollidedEntities.Remove(bullet.Collision);
+            bullets.Remove(bullet);
+            bullet = null;
         }
     }
 }
