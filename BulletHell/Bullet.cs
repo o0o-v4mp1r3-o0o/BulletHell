@@ -19,6 +19,7 @@ namespace BulletHell
         private float x, y;
         private Collision collision;
         private bool isOffscreen;
+        private bool isFriendly;
 
         public Bullet(float damage, Vector2 bulletPosition, float bulletSpeed, float direction)
         {
@@ -35,6 +36,7 @@ namespace BulletHell
         public float BulletSpeed { get => bulletSpeed; set => bulletSpeed = value; }
         public Collision Collision { get => collision; set => collision = value; }
         public bool IsOffscreen { get => isOffscreen; set => isOffscreen = value; }
+        public bool IsFriendly { get => isFriendly; set => isFriendly = value; }
 
         public void addCollision()
         {

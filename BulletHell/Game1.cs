@@ -12,7 +12,6 @@ namespace BulletHell
         private SpriteBatch _spriteBatch;
         Input input = new Input();
         YorHa yorha;
-        Bullet bullet;
         List<Bullet> bullets = new List<Bullet>();
         List<Collision> checkCollidedEntities = new List<Collision>();
 
@@ -30,7 +29,6 @@ namespace BulletHell
             input.IsGame = true;
             yorha = new YorHa(_graphics.PreferredBackBufferWidth / 2,
             _graphics.PreferredBackBufferHeight / 2,200f);
-            //bullet = new Bullet(100f, new Vector2(200, 200), 50f,350f);
             float c = 0;
             for(int i = 0; i < 12; i++)
             {
@@ -43,11 +41,9 @@ namespace BulletHell
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            //bullet = Content.Load<Texture2D>("bulletreal");
             yorha.YorhaTexture = Content.Load<Texture2D>("YorHa");
-            //bullet.BulletTexture = Content.Load<Texture2D>("bulletreal");
+            //yorha.Bullet.BulletTexture = Content.Load<Texture2D>("YorHaBullet");
             yorha.addCollision();
-            //bullet.addCollision();
             checkCollidedEntities.Add(yorha.Collision);
             foreach (Bullet bullet in bullets)
             {
@@ -65,10 +61,7 @@ namespace BulletHell
 
             // TODO: Add your update logic here
             yorha.input(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
-            //bullet.travelDirection(gameTime);
             yorha.update();
-            //bullet.update(_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight,bullet,checkCollidedEntities,bullets);
-            //yorha.Collision.isCollision(bullet,checkCollidedEntities,bullets);
             for(int i = 0; i < bullets.Count; i++)
             {
                 bullets[i].travelDirection(gameTime);
@@ -97,7 +90,6 @@ namespace BulletHell
 
             _spriteBatch.Begin();
             yorha.draw(_spriteBatch);
-            //bullet.draw(_spriteBatch);
             foreach (Bullet bullet in bullets)
             {
                 bullet.draw(_spriteBatch);

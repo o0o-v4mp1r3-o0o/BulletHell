@@ -18,11 +18,11 @@ namespace BulletHell
         public bool IsMenu { get => isMenu; set => isMenu = value; }
         public bool IsTitleScreen { get => isTitleScreen; set => isTitleScreen = value; }
 
-        public void inputState(GameTime gameTime, int screenWidth, int screenHeight, YorHa yorha)
+        public void inputState(GameTime gameTime, int screenWidth, int screenHeight, Vector2 yorhaPosition, float yorhaSpeed)
         {
             if (isGame)
             {
-                gameMovements(gameTime, screenWidth, screenHeight, yorha);
+                gameMovements(gameTime, screenWidth, screenHeight, yorhaPosition,yorhaSpeed);
             }
             else if (isMenu)
             {
@@ -34,9 +34,29 @@ namespace BulletHell
             }
         }
 
-        public void gameMovements(GameTime gameTime, int screenWidth, int screenHeight, YorHa yorha)
+        public void gameMovements(GameTime gameTime, int screenWidth, int screenHeight, Vector2 yorhaPosition, float yorhaSpeed)
         {
             var kstate = Keyboard.GetState();
+            if (kstate.IsKeyDown(Keys.Up))
+            {
+                yorhaPosition.Y -= yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+
+            if (kstate.IsKeyDown(Keys.Down))
+            {
+                yorhaPosition.Y += yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+
+            if (kstate.IsKeyDown(Keys.Left))
+            {
+                yorhaPosition.X -= yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+
+            if (kstate.IsKeyDown(Keys.Right))
+            {
+                yorhaPosition.X += yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+
         }
 
         public void menuMovements()

@@ -19,14 +19,17 @@ namespace BulletHell
         private float yorhaDistance;
         private float yorhaHealth = 100;
         private Collision collision;
+        private Bullet bullet;
+        private float yorhaDamage;
 
         public Texture2D YorhaTexture { get => yorhaTexture; set => yorhaTexture = value; }
         public Vector2 YorhaPosition { get => yorhaPosition; set => yorhaPosition = value; }
         public float YorhaSpeed { get => yorhaSpeed; set => yorhaSpeed = value; }
         public float YorhaDistance { get => yorhaDistance; set => yorhaDistance = value; }
         public float YorhaHealth { get => yorhaHealth; set => yorhaHealth = value; }
-
         public Collision Collision { get => collision; set => collision = value; }
+        public Bullet Bullet { get => bullet; set => bullet = value; }
+        public float YorhaDamage { get => yorhaDamage; set => yorhaDamage = value; }
 
         public YorHa(int YLocation, int XLocation, float speed)
         {
@@ -84,7 +87,6 @@ namespace BulletHell
         public void update()
         {
             collision.updateBounds(yorhaPosition.X, yorhaPosition.Y, yorhaTexture.Width, yorhaTexture.Height);
-            if (yorhaHealth == 0) System.Diagnostics.Debug.WriteLine("dead!");
         }
         public void draw(SpriteBatch _spriteBatch)
         {
@@ -103,6 +105,15 @@ namespace BulletHell
         public void takeDamage(Bullet bullet)
         {
             YorhaHealth -= bullet.Damage;
+        }
+
+        public void calculateDirection()
+        {
+
+        }
+        public void fireGun()
+        {
+
         }
     }
 }
