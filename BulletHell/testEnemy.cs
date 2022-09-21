@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -13,10 +14,17 @@ namespace BulletHell
 {
     internal class testEnemy : LivingEntity
     {
-        testEnemy()
+        public testEnemy(ContentManager Content)
         {
-            health = 1;
-
+            Health = 1;
+            AimDirection = 270;
+            Position = new Vector2(300,50);
+            Speed = 1;
+            FiringRate = 3f;
+            FiredBullets = new List<Bullet>();
+            GameTimer = 0;
+            Team = 1;
+            Texture = Content.Load<Texture2D>("enemy1");
         }
         
     }

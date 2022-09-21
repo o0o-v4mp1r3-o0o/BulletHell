@@ -13,7 +13,7 @@ namespace BulletHell
         Input input = new Input();
         YorHa yorha;
         List<Bullet> bullets = new List<Bullet>();
-        List<Collision> checkCollidedEntities = new List<Collision>();
+        List<LivingEntity> enemies = new List<LivingEntity>();
 
         public Game1()
         {
@@ -29,10 +29,12 @@ namespace BulletHell
             input.IsGame = true;
             yorha = new YorHa(_graphics.PreferredBackBufferWidth / 2,
             _graphics.PreferredBackBufferHeight / 2,200f);
+            enemies.Add(new testEnemy(Content));
+            
             float c = 0;
             for(int i = 0; i < 12; i++)
             {
-                bullets.Add(new Bullet(100f, new Vector2(200, 200), 50f, c));
+                bullets.Add(new Bullet(100f, new Vector2(200, 200), 50f, c,1));
                 c += 30f;
             }
             base.Initialize();
@@ -42,14 +44,15 @@ namespace BulletHell
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             yorha.YorhaTexture = Content.Load<Texture2D>("YorHa");
-            //yorha.Bullet.BulletTexture = Content.Load<Texture2D>("YorHaBullet");
-            yorha.addCollision();
-            checkCollidedEntities.Add(yorha.Collision);
+            yorha.addFeatures(Content);
+            foreach (testEnemy testEnemy in enemies)
+            {
+                testEnemy.addFeatures(Content);
+            }
             foreach (Bullet bullet in bullets)
             {
                 bullet.BulletTexture = Content.Load<Texture2D>("bulletreal");
                 bullet.addCollision();
-                checkCollidedEntities.Add(bullet.Collision);
             }
             // TODO: use this.Content to load your game content here
         }
@@ -60,22 +63,27 @@ namespace BulletHell
                 Exit();
 
             // TODO: Add your update logic here
-            yorha.input(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
-            yorha.update();
+            yorha.input(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight, Content);
+            yorha.update(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight, bullets, enemies);
+            foreach(LivingEntity l in enemies)
+            {
+                l.update(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+            }
+
             for(int i = 0; i < bullets.Count; i++)
             {
                 bullets[i].travelDirection(gameTime);
-                bullets[i].update(_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight, bullets[i],checkCollidedEntities,bullets);
+                bullets[i].update(_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight, bullets[i],bullets);
                 if (bullets[i].IsOffscreen)
                 {
-                    bullets[i].destroySelf(bullets[i], checkCollidedEntities, bullets);
+                    bullets[i].destroySelf(bullets[i], bullets);
                     i--;
                 }
-                else if (yorha.Collision.isCollision(bullets[i], checkCollidedEntities, bullets))
+                else if (yorha.Collision.isCollision(bullets[i], bullets))
                 {
                     yorha.takeDamage(bullets[i]);
                     System.Diagnostics.Debug.WriteLine(yorha.YorhaHealth);
-                    bullets[i].destroySelf(bullets[i], checkCollidedEntities, bullets);
+                    bullets[i].destroySelf(bullets[i], bullets);
                     i--;
                 }
             }
@@ -93,6 +101,10 @@ namespace BulletHell
             foreach (Bullet bullet in bullets)
             {
                 bullet.draw(_spriteBatch);
+            }
+            foreach (LivingEntity l in enemies)
+            {
+                l.draw(_spriteBatch);
             }
             _spriteBatch.End();
             // TODO: Add your drawing code here

@@ -26,7 +26,7 @@ namespace BulletHell
             _bounds.X = (int)xPos;
             _bounds.Y = (int)yPos;
         }
-        public bool isCollision(Bullet bullet, List<Collision> checkCollidedEntities, List<Bullet> bullets)
+        public bool isCollision(Bullet bullet, List<Bullet> bullets)
         {
             if(isTouchingBottom(bullet) || isTouchingLeft(bullet) || isTouchingRight(bullet) || isTouchingTop(bullet))
             {

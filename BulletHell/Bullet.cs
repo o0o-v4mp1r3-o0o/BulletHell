@@ -19,14 +19,15 @@ namespace BulletHell
         private float x, y;
         private Collision collision;
         private bool isOffscreen;
-        private bool isFriendly;
+        private int bulletTeam;
 
-        public Bullet(float damage, Vector2 bulletPosition, float bulletSpeed, float direction)
+        public Bullet(float damage, Vector2 bulletPosition, float bulletSpeed, float direction, int bulletTeam)
         {
             this.damage = damage;
             this.bulletPosition = bulletPosition;
             this.bulletSpeed = bulletSpeed;
             this.direction = (float)(direction * (Math.PI / 180.0));
+            this.bulletTeam = bulletTeam;
             calculateDirection();
         }
 
@@ -36,7 +37,7 @@ namespace BulletHell
         public float BulletSpeed { get => bulletSpeed; set => bulletSpeed = value; }
         public Collision Collision { get => collision; set => collision = value; }
         public bool IsOffscreen { get => isOffscreen; set => isOffscreen = value; }
-        public bool IsFriendly { get => isFriendly; set => isFriendly = value; }
+        public int BulletTeam { get => bulletTeam; set => bulletTeam = value; }
 
         public void addCollision()
         {
@@ -44,7 +45,7 @@ namespace BulletHell
 
         }
 
-        public void update(int screenWidth, int screenHeight, Bullet bullet, List<Collision> checkCollidedEntities, List<Bullet> bullets)
+        public void update(int screenWidth, int screenHeight, Bullet bullet, List<Bullet> bullets)
         {
             collision.updateBounds(bulletPosition.X, bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
             if ((bulletPosition.X > screenWidth) || (bulletPosition.X < bulletTexture.Width / 2) || 
@@ -90,11 +91,18 @@ namespace BulletHell
             }
         }
 
-        public void destroySelf(Bullet bullet, List<Collision> checkCollidedEntities, List<Bullet> bullets)
+        public void destroySelf(Bullet bullet, List<Bullet> bullets)
         {
-            checkCollidedEntities.Remove(bullet.Collision);
             bullets.Remove(bullet);
             bullet = null;
+        }
+        public bool isOnSameTeam(Bullet bullet1, Bullet bullet2)
+        {
+            return bullet1.BulletTeam == bullet2.BulletTeam;
+        }
+        public bool isOnSameTeam(Bullet bullet, LivingEntity entity)
+        {
+            return bullet.BulletTeam == entity.Team;
         }
     }
 }
