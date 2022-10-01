@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,11 @@ namespace BulletHell
         public bool IsMenu { get => isMenu; set => isMenu = value; }
         public bool IsTitleScreen { get => isTitleScreen; set => isTitleScreen = value; }
 
-        public void inputState(GameTime gameTime, int screenWidth, int screenHeight, Vector2 yorhaPosition, float yorhaSpeed)
+        public void inputState(GameTime gameTime, int screenWidth, int screenHeight, YorHa yorHa)
         {
             if (isGame)
             {
-                gameMovements(gameTime, screenWidth, screenHeight, yorhaPosition,yorhaSpeed);
+                gameMovements(gameTime, screenWidth, screenHeight, yorHa);
             }
             else if (isMenu)
             {
@@ -34,29 +35,30 @@ namespace BulletHell
             }
         }
 
-        public void gameMovements(GameTime gameTime, int screenWidth, int screenHeight, Vector2 yorhaPosition, float yorhaSpeed)
+        public void gameMovements(GameTime gameTime, int screenWidth, int screenHeight, YorHa yorHa)
         {
             var kstate = Keyboard.GetState();
+            Vector2 yorHaposition = yorHa.YorhaPosition;
             if (kstate.IsKeyDown(Keys.Up))
             {
-                yorhaPosition.Y -= yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                yorHaposition.Y -= yorHa.YorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if (kstate.IsKeyDown(Keys.Down))
             {
-                yorhaPosition.Y += yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                yorHaposition.Y += yorHa.YorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if (kstate.IsKeyDown(Keys.Left))
             {
-                yorhaPosition.X -= yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                yorHaposition.X -= yorHa.YorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if (kstate.IsKeyDown(Keys.Right))
             {
-                yorhaPosition.X += yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                yorHaposition.X += yorHa.YorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-
+            yorHa.YorhaPosition = yorHaposition;
         }
 
         public void menuMovements()

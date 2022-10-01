@@ -60,7 +60,8 @@ namespace BulletHell
                 Exit();
 
             // TODO: Add your update logic here
-            yorha.input(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+            //yorha.input(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+            input.inputState(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight, yorha);
             yorha.update();
             for(int i = 0; i < bullets.Count; i++)
             {
