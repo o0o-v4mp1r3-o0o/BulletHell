@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BulletHell
+namespace BulletHell.Model
 {
-    internal class Bullet
+    internal class Bullet : BulletBase
     {
         private float damage;
         private Texture2D bulletTexture;
@@ -48,17 +48,17 @@ namespace BulletHell
         public void update(int screenWidth, int screenHeight, Bullet bullet, List<Bullet> bullets)
         {
             collision.updateBounds(bulletPosition.X, bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
-            if ((bulletPosition.X > screenWidth) || (bulletPosition.X < bulletTexture.Width / 2) || 
-                    (bulletPosition.Y > screenHeight) || (bulletPosition.Y < bulletTexture.Height / 2))
+            if (bulletPosition.X > screenWidth || bulletPosition.X < bulletTexture.Width / 2 ||
+                    bulletPosition.Y > screenHeight || bulletPosition.Y < bulletTexture.Height / 2)
             {
                 isOffscreen = true;
             }
-            
+
         }
         public void draw(SpriteBatch _spriteBatch)
         {
             _spriteBatch.Draw(
-            bulletTexture,bulletPosition,null,Color.White,0f,new Vector2(bulletTexture.Width / 2, bulletTexture.Height / 2),Vector2.One,SpriteEffects.None,0f);
+            bulletTexture, bulletPosition, null, Color.White, 0f, new Vector2(bulletTexture.Width / 2, bulletTexture.Height / 2), Vector2.One, SpriteEffects.None, 0f);
         }
 
         public void travelDirection(GameTime gameTime)
@@ -72,17 +72,17 @@ namespace BulletHell
             if (direction < 90)
             {
                 x = (float)Math.Cos(direction) * bulletSpeed;
-                y = (float)Math.Sin(direction) * bulletSpeed*-1;
+                y = (float)Math.Sin(direction) * bulletSpeed * -1;
             }
-            else if(direction>=90 && direction < 180)
+            else if (direction >= 90 && direction < 180)
             {
-                x = (float)Math.Cos(180 - direction) * bulletSpeed*-1;
-                y = (float)Math.Sin(180 - direction) * bulletSpeed*-1;
+                x = (float)Math.Cos(180 - direction) * bulletSpeed * -1;
+                y = (float)Math.Sin(180 - direction) * bulletSpeed * -1;
             }
-            else if(direction >= 180 && direction < 270)
+            else if (direction >= 180 && direction < 270)
             {
-                x = (float)Math.Cos(270-direction) * bulletSpeed*-1;
-                y = (float)Math.Sin(270-direction) * bulletSpeed;
+                x = (float)Math.Cos(270 - direction) * bulletSpeed * -1;
+                y = (float)Math.Sin(270 - direction) * bulletSpeed;
             }
             else
             {
@@ -100,9 +100,9 @@ namespace BulletHell
         {
             return bullet1.BulletTeam == bullet2.BulletTeam;
         }
-        public bool isOnSameTeam(Bullet bullet, LivingEntity entity)
-        {
-            return bullet.BulletTeam == entity.Team;
-        }
+        //public bool isOnSameTeam(Bullet bullet, LivingEntity entity)
+        //{
+        //    return bullet.BulletTeam == entity.Team;
+        //}
     }
 }

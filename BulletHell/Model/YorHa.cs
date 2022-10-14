@@ -12,9 +12,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace BulletHell
+namespace BulletHell.Model
 {
-    internal class YorHa
+    internal class YorHa : PlayerBase
     {
         private Texture2D yorhaTexture;
         private Vector2 yorhaPosition;
@@ -54,7 +54,7 @@ namespace BulletHell
         public void addFeatures(ContentManager Content)
         {
             collision = new Collision(yorhaPosition.X, yorhaPosition.Y, yorhaTexture.Width, yorhaTexture.Height);
-            bullet = new Bullet(100f, new Vector2(yorhaPosition.X, yorhaPosition.Y - yorhaTexture.Height / 2), 1000f, 90f,0);
+            bullet = new Bullet(100f, new Vector2(yorhaPosition.X, yorhaPosition.Y - yorhaTexture.Height / 2), 1000f, 90f, 0);
             bullet.BulletTexture = Content.Load<Texture2D>("YorHaBullet");
         }
 
@@ -63,26 +63,26 @@ namespace BulletHell
             var kstate = Keyboard.GetState();
             var mstate = Mouse.GetState();
 
-            if (kstate.IsKeyDown(Keys.Up))
-            {
-                yorhaPosition.Y -= yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
+            //if (kstate.IsKeyDown(Keys.Up))
+            //{
+            //    yorhaPosition.Y -= yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //}
 
-            if (kstate.IsKeyDown(Keys.Down))
-            {
-                yorhaPosition.Y += yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
+            //if (kstate.IsKeyDown(Keys.Down))
+            //{
+            //    yorhaPosition.Y += yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //}
 
-            if (kstate.IsKeyDown(Keys.Left))
-            {
-                yorhaPosition.X -= yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
+            //if (kstate.IsKeyDown(Keys.Left))
+            //{
+            //    yorhaPosition.X -= yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //}
 
-            if (kstate.IsKeyDown(Keys.Right))
-            {
-                yorhaPosition.X += yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            if(mstate.LeftButton == ButtonState.Pressed)
+            //if (kstate.IsKeyDown(Keys.Right))
+            //{
+            //    yorhaPosition.X += yorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //}
+            if (mstate.LeftButton == ButtonState.Pressed)
             {
                 if ((float)gameTime.TotalGameTime.TotalSeconds - gameTimer > yorhaFiringRate)
                 {
@@ -112,42 +112,42 @@ namespace BulletHell
         public void update(GameTime gameTime, int screenWidth, int screenHeight, List<Bullet> bullets, List<LivingEntity> enemies)
         {
             collision.updateBounds(yorhaPosition.X, yorhaPosition.Y, yorhaTexture.Width, yorhaTexture.Height);
-            for(int i = 0; i < firedBullets.Count; i++)
-            {
-                firedBullets[i].travelDirection(gameTime);
-                firedBullets[i].update(screenWidth, screenHeight, firedBullets[i],firedBullets);
-                if (firedBullets[i].IsOffscreen)
-                {
-                    firedBullets[i].destroySelf(firedBullets[i], firedBullets);
-                    i--;
-                }
-                foreach (Bullet bullet in bullets)
-                {
-                    if (i < 0) break;
-                    if (firedBullets[i].Collision.isCollision(bullet, bullets) && !bullet.isOnSameTeam(firedBullets[i],bullet))
-                    {
-                        bullet.destroySelf(bullet, bullets);
-                        firedBullets[i].destroySelf(firedBullets[i], firedBullets);
-                        i--;
-                        break;
-                    }
-                }
-                if (i < 0) break;
-                foreach (LivingEntity enemy in enemies)
-                {
-                    if (i < 0) break;
-                    if (enemy.Collision.isCollision(firedBullets[i], firedBullets) && !firedBullets[i].isOnSameTeam(firedBullets[i], enemy))
-                    {
-                        
-                        enemy.takeDamage(firedBullets[i], enemy, enemies);
-                        firedBullets[i].destroySelf(firedBullets[i], firedBullets);
-                        i--;
-                        break;
-                    }
-                }
-                if (i < 0) break;
-            }
-            
+            //for(int i = 0; i < firedBullets.Count; i++)
+            //{
+            //    //firedBullets[i].travelDirection(gameTime);
+            //    //firedBullets[i].update(screenWidth, screenHeight, firedBullets[i],firedBullets);
+            //    //if (firedBullets[i].IsOffscreen)
+            //    //{
+            //    //    firedBullets[i].destroySelf(firedBullets[i], firedBullets);
+            //    //    i--;
+            //    //}
+            //    //foreach (Bullet bullet in bullets)
+            //    //{
+            //    //    if (i < 0) break;
+            //    //    if (firedBullets[i].Collision.isCollision(bullet, bullets) && !bullet.isOnSameTeam(firedBullets[i],bullet))
+            //    //    {
+            //    //        bullet.destroySelf(bullet, bullets);
+            //    //        firedBullets[i].destroySelf(firedBullets[i], firedBullets);
+            //    //        i--;
+            //    //        break;
+            //    //    }
+            //    //}
+            //    //if (i < 0) break;
+            //    //foreach (LivingEntity enemy in enemies)
+            //    //{
+            //    //    if (i < 0) break;
+            //    //    if (enemy.Collision.isCollision(firedBullets[i], firedBullets) && !firedBullets[i].isOnSameTeam(firedBullets[i], enemy))
+            //    //    {
+
+            //    //        enemy.takeDamage(firedBullets[i], enemy, enemies);
+            //    //        firedBullets[i].destroySelf(firedBullets[i], firedBullets);
+            //    //        i--;
+            //    //        break;
+            //    //    }
+            //    //}
+            //    //if (i < 0) break;
+            //}
+
         }
         public void draw(SpriteBatch _spriteBatch)
         {
@@ -178,7 +178,7 @@ namespace BulletHell
         }
         public void fireGun(ContentManager Content)
         {
-            Bullet firedBullet = new Bullet(100f, new Vector2(yorhaPosition.X, yorhaPosition.Y - yorhaTexture.Height/2), 1000f, aimDirection,team);
+            Bullet firedBullet = new Bullet(100f, new Vector2(yorhaPosition.X, yorhaPosition.Y - yorhaTexture.Height / 2), 1000f, aimDirection, team);
             firedBullet.BulletTexture = bullet.BulletTexture;
             firedBullet.addCollision();
             firedBullets.Add(firedBullet);

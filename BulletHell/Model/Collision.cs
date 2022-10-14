@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BulletHell
+namespace BulletHell.Model
 {
-    internal class Collision
+    internal interface Collision
     {
         public Rectangle _bounds;
         public float xPos, yPos;
@@ -28,7 +28,7 @@ namespace BulletHell
         }
         public bool isCollision(Bullet bullet, List<Bullet> bullets)
         {
-            if(isTouchingBottom(bullet) || isTouchingLeft(bullet) || isTouchingRight(bullet) || isTouchingTop(bullet))
+            if (isTouchingBottom(bullet) || isTouchingLeft(bullet) || isTouchingRight(bullet) || isTouchingTop(bullet))
             {
                 System.Diagnostics.Debug.WriteLine("collided!");
                 return true;
