@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Net.Mime;
 
-namespace BulletHell.View
+namespace BulletHell
 {
     public class Game1 : Game
     {
@@ -45,8 +45,8 @@ namespace BulletHell.View
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            yorha.YorhaTexture = Content.Load<Texture2D>("YorHa");
-            yorha.addFeatures(Content);
+            yorha.Texture = Content.Load<Texture2D>("YorHa");
+            //yorha.addFeatures(Content);
             //foreach (testEnemy testEnemy in enemies)
             //{
             //    testEnemy.addFeatures(Content);

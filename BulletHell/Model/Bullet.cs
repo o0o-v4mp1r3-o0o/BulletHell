@@ -39,20 +39,15 @@ namespace BulletHell.Model
         public bool IsOffscreen { get => isOffscreen; set => isOffscreen = value; }
         public int BulletTeam { get => bulletTeam; set => bulletTeam = value; }
 
-        public void addCollision()
-        {
-            collision = new Collision(bulletPosition.X, bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
-
-        }
 
         public void update(int screenWidth, int screenHeight, Bullet bullet, List<Bullet> bullets)
         {
-            collision.updateBounds(bulletPosition.X, bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
-            if (bulletPosition.X > screenWidth || bulletPosition.X < bulletTexture.Width / 2 ||
-                    bulletPosition.Y > screenHeight || bulletPosition.Y < bulletTexture.Height / 2)
-            {
-                isOffscreen = true;
-            }
+            //collision.updateBounds(bulletPosition.X, bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
+            //if (bulletPosition.X > screenWidth || bulletPosition.X < bulletTexture.Width / 2 ||
+            //        bulletPosition.Y > screenHeight || bulletPosition.Y < bulletTexture.Height / 2)
+            //{
+            //    isOffscreen = true;
+            //}
 
         }
         public void draw(SpriteBatch _spriteBatch)

@@ -38,29 +38,29 @@ namespace BulletHell.Controller
         public void gameMovements(GameTime gameTime, int screenWidth, int screenHeight, YorHa yorHa)
         {
             var kstate = Keyboard.GetState();
-            Vector2 yorhaPosition = yorHa.YorhaPosition;
+            Vector2 yorhaPosition = yorHa.Position;
 
             if (kstate.IsKeyDown(Keys.Up))
             {
-                yorhaPosition.Y -= yorHa.YorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                yorhaPosition.Y -= yorHa.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if (kstate.IsKeyDown(Keys.Down))
             {
-                yorhaPosition.Y += yorHa.YorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                yorhaPosition.Y += yorHa.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if (kstate.IsKeyDown(Keys.Left))
             {
-                yorhaPosition.X -= yorHa.YorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                yorhaPosition.X -= yorHa.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if (kstate.IsKeyDown(Keys.Right))
             {
-                yorhaPosition.X += yorHa.YorhaSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                yorhaPosition.X += yorHa.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
-            yorHa.YorhaPosition = yorhaPosition;
+            yorHa.Position = yorhaPosition;
         }
 
         public void menuMovements()

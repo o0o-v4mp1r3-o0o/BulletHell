@@ -8,6 +8,6 @@ namespace BulletHell.Model
 {
     internal class PlayerBase : LivingEntity, Collision
     {
-        private bool isPlayer = true;
+
     }
 }
