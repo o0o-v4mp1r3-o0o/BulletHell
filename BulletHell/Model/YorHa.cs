@@ -64,7 +64,7 @@ namespace BulletHell.Model
         //    }
         //}
 
-        public void update(GameTime gameTime, int screenWidth, int screenHeight, List<Bullet> bullets, List<LivingEntity> enemies)
+        public void update(GameTime gameTime, int screenWidth, int screenHeight, List<BulletA> bullets, List<LivingEntity> enemies)
         {
             //collision.updateBounds(yorhaPosition.X, yorhaPosition.Y, yorhaTexture.Width, yorhaTexture.Height);
             //for(int i = 0; i < firedBullets.Count; i++)
@@ -122,7 +122,7 @@ namespace BulletHell.Model
             //bullet.BulletTexture, bullet.BulletPosition, null, Color.White, 0f, new Vector2(bullet.BulletTexture.Width / 2, bullet.BulletTexture.Height / 2), Vector2.One, SpriteEffects.None, 0f);
             //}
         }
-        public void takeDamage(Bullet bullet)
+        public void takeDamage(BulletA bullet)
         {
             Health -= bullet.Damage;
         }

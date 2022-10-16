@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BulletHell.Model
 {
-    internal class BulletManager
+    internal class BulletB : BulletBase
     {
-        /* 
-         * Don't worry about me for now
+        /*
+         * Define a second bullet type here
          */
     }
 }

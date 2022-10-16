@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BulletHell.Model
 {
-    internal class Bullet : BulletBase
+    internal class BulletA : BulletBase
     {
         private float damage;
         private Texture2D bulletTexture;
@@ -21,7 +21,7 @@ namespace BulletHell.Model
         private bool isOffscreen;
         private int bulletTeam;
 
-        public Bullet(float damage, Vector2 bulletPosition, float bulletSpeed, float direction, int bulletTeam)
+        public BulletA(float damage, Vector2 bulletPosition, float bulletSpeed, float direction, int bulletTeam)
         {
             this.damage = damage;
             this.bulletPosition = bulletPosition;
@@ -40,7 +40,7 @@ namespace BulletHell.Model
         public int BulletTeam { get => bulletTeam; set => bulletTeam = value; }
 
 
-        public void update(int screenWidth, int screenHeight, Bullet bullet, List<Bullet> bullets)
+        public void update(int screenWidth, int screenHeight, BulletA bullet, List<BulletA> bullets)
         {
             //collision.updateBounds(bulletPosition.X, bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
             //if (bulletPosition.X > screenWidth || bulletPosition.X < bulletTexture.Width / 2 ||
@@ -86,12 +86,12 @@ namespace BulletHell.Model
             }
         }
 
-        public void destroySelf(Bullet bullet, List<Bullet> bullets)
+        public void destroySelf(BulletA bullet, List<BulletA> bullets)
         {
             bullets.Remove(bullet);
             bullet = null;
         }
-        public bool isOnSameTeam(Bullet bullet1, Bullet bullet2)
+        public bool isOnSameTeam(BulletA bullet1, BulletA bullet2)
         {
             return bullet1.BulletTeam == bullet2.BulletTeam;
         }

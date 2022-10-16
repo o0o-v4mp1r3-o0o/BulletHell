@@ -17,6 +17,9 @@ namespace BulletHell.Model
         private float direction;
         private float distance;
         private float x, y;
+        public Rectangle _bounds;
+        public float xPos, yPos;
+        public int width, height;
 
         public Texture2D Texture { get => texture; set => texture = value; }
         public Vector2 Position { get => position; set => position = value; }

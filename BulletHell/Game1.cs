@@ -14,7 +14,7 @@ namespace BulletHell
         private SpriteBatch _spriteBatch;
         Input input = new Input();
         YorHa yorha;
-        List<Bullet> bullets = new List<Bullet>();
+        List<BulletA> bullets = new List<BulletA>();
         List<LivingEntity> enemies = new List<LivingEntity>();
 
         public Game1()
@@ -101,7 +101,7 @@ namespace BulletHell
 
             _spriteBatch.Begin();
             yorha.draw(_spriteBatch);
-            foreach (Bullet bullet in bullets)
+            foreach (BulletA bullet in bullets)
             {
                 bullet.draw(_spriteBatch);
             }

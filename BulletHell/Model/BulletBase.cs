@@ -9,27 +9,17 @@ using System.Threading;
 
 namespace BulletHell.Model
 {
-    internal class BulletBase : Entity, Collision
+    internal abstract class BulletBase : Entity, Collision
     {
         private float damage;
         private bool isOffscreen;
         private int team;
 
-        //public Bullet(float damage, Vector2 bulletPosition, float bulletSpeed, float direction, int bulletTeam)
-        //{
-        //    this.Damage = damage;
-        //    this.Position = bulletPosition;
-        //    this.Speed = bulletSpeed;
-        //    this.Direction = (float)(direction * (Math.PI / 180.0));
-        //    this.Team = bulletTeam;
-        //    calculateDirection();
-        //}
-
         public float Damage { get => damage; set => damage = value; }
         public bool IsOffscreen { get => isOffscreen; set => isOffscreen = value; }
         public int Team { get => team; set => team = value; }
 
-        public void update(int screenWidth, int screenHeight, Bullet bullet, List<Bullet> bullets)
+        public void update(int screenWidth, int screenHeight, BulletA bullet, List<BulletA> bullets)
         {
             //collision.updateBounds(bulletPosition.X, bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
             //if (bulletPosition.X > screenWidth || bulletPosition.X < bulletTexture.Width / 2 ||
@@ -77,18 +67,14 @@ namespace BulletHell.Model
             }
         }
 
-        public void destroySelf(Bullet bullet, List<Bullet> bullets)
+        public void destroySelf(BulletA bullet, List<BulletA> bullets)
         {
             bullets.Remove(bullet);
             bullet = null;
         }
-        public bool isOnSameTeam(Bullet bullet1, Bullet bullet2)
+        public bool isOnSameTeam(BulletA bullet1, BulletA bullet2)
         {
             return bullet1.BulletTeam == bullet2.BulletTeam;
         }
-        //public bool isOnSameTeam(Bullet bullet, LivingEntity entity)
-        //{
-        //    return bullet.BulletTeam == entity.Team;
-        //}
     }
 }

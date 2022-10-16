@@ -13,13 +13,16 @@ namespace BulletHell.Model
     internal class LivingEntity : Entity
     {
         private float health;
-        private float damage;
         private float firingRate;
         private float aimDirection;
         private int team;
-
+        /* Damage doesen't go here.
+         * Why?
+         * Who owns damage? 
+         */
+        //private int damage;
+        
         public float Health { get => health; set => health = value; }
-        public float Damage { get => damage; set => damage = value; }
         public float FiringRate { get => firingRate; set => firingRate = value; }
         public float AimDirection { get => aimDirection; set => aimDirection = value; }
         public int Team { get => team; set => team = value; }
@@ -69,7 +72,7 @@ namespace BulletHell.Model
         {
 
         }
-        public void takeDamage(Bullet bullet, LivingEntity enemy, List<LivingEntity> enemies)
+        public void takeDamage(BulletA bullet, LivingEntity enemy, List<LivingEntity> enemies)
         {
             Health -= bullet.Damage;
             System.Diagnostics.Debug.WriteLine("enemy collision!!" + Health + " " + bullet.Damage);

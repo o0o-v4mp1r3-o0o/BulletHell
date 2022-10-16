@@ -8,5 +8,8 @@ namespace BulletHell.Model
 {
     internal class BulletFactory
     {
+        /* 
+         * Don't worry about me for now
+         */
     }
 }
