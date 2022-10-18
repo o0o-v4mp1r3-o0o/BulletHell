@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BulletHell.Model
 {
-    internal class BulletFactory
+    internal class BulletFactoryA
     {
         /* 
          * Don't worry about me for now
