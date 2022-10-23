@@ -104,24 +104,24 @@ namespace BulletHell.Model
             //}
 
         }
-        public void draw(SpriteBatch _spriteBatch)
-        {
-            _spriteBatch.Draw(
-            Texture,
-            Position,
-            null,
-            Color.White,
-            0f,
-            new Vector2(Texture.Width / 2, Texture.Height / 2),
-            Vector2.One,
-            SpriteEffects.None,
-            0f);
-            //foreach (Bullet bullet in firedBullets)
-            //{
-            //    _spriteBatch.Draw(
-            //bullet.BulletTexture, bullet.BulletPosition, null, Color.White, 0f, new Vector2(bullet.BulletTexture.Width / 2, bullet.BulletTexture.Height / 2), Vector2.One, SpriteEffects.None, 0f);
-            //}
-        }
+        //public void draw(SpriteBatch _spriteBatch)
+        //{
+        //    _spriteBatch.Draw(
+        //    Texture,
+        //    Position,
+        //    null,
+        //    Color.White,
+        //    0f,
+        //    new Vector2(Texture.Width / 2, Texture.Height / 2),
+        //    Vector2.One,
+        //    SpriteEffects.None,
+        //    0f);
+        //    //foreach (Bullet bullet in firedBullets)
+        //    //{
+        //    //    _spriteBatch.Draw(
+        //    //bullet.BulletTexture, bullet.BulletPosition, null, Color.White, 0f, new Vector2(bullet.BulletTexture.Width / 2, bullet.BulletTexture.Height / 2), Vector2.One, SpriteEffects.None, 0f);
+        //    //}
+        //}
         public void takeDamage(BulletA bullet)
         {
             Health -= bullet.Damage;

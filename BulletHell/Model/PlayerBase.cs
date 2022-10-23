@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BulletHell.Model
 {
-    internal class PlayerBase : LivingEntity, Collision
+    internal class PlayerBase : LivingEntity
     {
 
     }

@@ -27,9 +27,8 @@ namespace BulletHell.Model
         public float AimDirection { get => aimDirection; set => aimDirection = value; }
         public int Team { get => team; set => team = value; }
 
-        public void update(GameTime gameTime, int screenWidth, int screenHeight)
+        public override void update(GameTime gameTime)
         {
-            //collision.updateBounds(Position.X, Position.Y, Texture.Width, Texture.Height);
             //for (int i = 0; i < firedBullets.Count; i++)
             //{
             //    firedBullets[i].travelDirection(gameTime);
@@ -48,31 +47,7 @@ namespace BulletHell.Model
             //}
         }
 
-        public void draw(SpriteBatch _spriteBatch)
-        {
-            _spriteBatch.Draw(
-            Texture,
-            Position,
-            null,
-            Color.White,
-            0f,
-            new Vector2(Texture.Width / 2, Texture.Height / 2),
-            Vector2.One,
-            SpriteEffects.None,
-            0f);
-
-            //foreach (Bullet bullet in firedBullets)
-            //{
-            //    _spriteBatch.Draw(
-            //bullet.BulletTexture, bullet.BulletPosition, null, Color.White, 0f, new Vector2(bullet.BulletTexture.Width / 2, bullet.BulletTexture.Height / 2), Vector2.One, SpriteEffects.None, 0f);
-            //}
-        }
-
-        public void movement()
-        {
-
-        }
-        public void takeDamage(BulletA bullet, LivingEntity enemy, List<LivingEntity> enemies)
+        public void takeDamage(BulletBase bullet)
         {
             Health -= bullet.Damage;
             System.Diagnostics.Debug.WriteLine("enemy collision!!" + Health + " " + bullet.Damage);

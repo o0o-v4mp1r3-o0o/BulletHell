@@ -14,14 +14,16 @@ namespace BulletHell
         private SpriteBatch _spriteBatch;
         Input input = new Input();
         YorHa yorha;
-        List<BulletA> bullets = new List<BulletA>();
+        List<BulletA> bulletAList = new List<BulletA>();
         List<LivingEntity> enemies = new List<LivingEntity>();
+        private BulletFactory bulletFactory;
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            bulletFactory = BulletFactory.GetBulletFactory();
         }
 
         protected override void Initialize()
@@ -32,6 +34,15 @@ namespace BulletHell
             yorha = new YorHa(_graphics.PreferredBackBufferWidth / 2,
             _graphics.PreferredBackBufferHeight / 2, 200f);
             //enemies.Add(new testEnemy(Content));
+            for (int i = 0; i < 10; i++)
+            {
+                BulletA tempBullet = (BulletA)bulletFactory.buildBullet(BulletFactory.BulletType.BulletA);
+                tempBullet.Texture = Content.Load<Texture2D>("bulletreal");
+                tempBullet.Position = new Vector2(200, 200);
+                tempBullet.Direction = 20f * i;
+                tempBullet.Speed = 10f;
+                bulletAList.Add(tempBullet);
+            }
 
             //float c = 0;
             //for(int i = 0; i < 12; i++)
@@ -67,7 +78,25 @@ namespace BulletHell
             // TODO: Add your update logic here
             //yorha.input(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight, Content);
             input.inputState(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight, yorha);
-            yorha.update(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight, bullets, enemies);
+            yorha.update(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight, bulletAList, enemies);
+
+            List<BulletBase> deadList = new List<BulletBase>();
+            foreach (BulletBase bullet in bulletAList)
+            {
+                bullet.update(gameTime);
+                if (yorha.isCollision(bullet))
+                {
+                    deadList.Add(bullet);
+                }
+            }
+
+            //foreach (BulletBase bullet in deadList)
+            //{
+            //    bulletAList.Remove((BulletA)bullet);
+            //}
+
+            //deadList.Clear();
+
             //foreach(LivingEntity l in enemies)
             //{
             //    l.update(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
@@ -101,7 +130,7 @@ namespace BulletHell
 
             _spriteBatch.Begin();
             yorha.draw(_spriteBatch);
-            foreach (BulletA bullet in bullets)
+            foreach (BulletA bullet in bulletAList)
             {
                 bullet.draw(_spriteBatch);
             }
