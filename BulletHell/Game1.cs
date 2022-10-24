@@ -17,6 +17,7 @@ namespace BulletHell
         List<BulletA> bulletAList = new List<BulletA>();
         List<LivingEntity> enemies = new List<LivingEntity>();
         private BulletFactory bulletFactory;
+        private BulletManager bulletManager;
 
         public Game1()
         {
@@ -37,11 +38,12 @@ namespace BulletHell
             for (int i = 0; i < 10; i++)
             {
                 BulletA tempBullet = (BulletA)bulletFactory.buildBullet(BulletFactory.BulletType.BulletA);
-                tempBullet.Texture = Content.Load<Texture2D>("bulletreal");
+                tempBullet.Texture = bulletManager.BulletA;
                 tempBullet.Position = new Vector2(200, 200);
                 tempBullet.Direction = 20f * i;
                 tempBullet.Speed = 10f;
-                bulletAList.Add(tempBullet);
+                bulletManager.addBullet(tempBullet);
+                //bulletAList.Add(tempBullet);
             }
 
             //float c = 0;
@@ -57,6 +59,7 @@ namespace BulletHell
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             yorha.Texture = Content.Load<Texture2D>("YorHa");
+            bulletManager.loadBulletTextures(Content);
             //yorha.addFeatures(Content);
             //foreach (testEnemy testEnemy in enemies)
             //{
@@ -81,14 +84,7 @@ namespace BulletHell
             yorha.update(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight, bulletAList, enemies);
 
             List<BulletBase> deadList = new List<BulletBase>();
-            foreach (BulletBase bullet in bulletAList)
-            {
-                bullet.update(gameTime);
-                if (yorha.isCollision(bullet))
-                {
-                    deadList.Add(bullet);
-                }
-            }
+            bulletManager.updateBulletPositions(gameTime, deadList, yorha);
 
             //foreach (BulletBase bullet in deadList)
             //{
@@ -130,10 +126,7 @@ namespace BulletHell
 
             _spriteBatch.Begin();
             yorha.draw(_spriteBatch);
-            foreach (BulletA bullet in bulletAList)
-            {
-                bullet.draw(_spriteBatch);
-            }
+            bulletManager.drawbullets(_spriteBatch);
             //foreach (LivingEntity l in enemies)
             //{
             //    l.draw(_spriteBatch);
