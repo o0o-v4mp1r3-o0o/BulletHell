@@ -25,6 +25,7 @@ namespace BulletHell
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             bulletFactory = BulletFactory.GetBulletFactory();
+            bulletManager = BulletManager.GetBulletManager();
         }
 
         protected override void Initialize()
@@ -35,6 +36,7 @@ namespace BulletHell
             yorha = new YorHa(_graphics.PreferredBackBufferWidth / 2,
             _graphics.PreferredBackBufferHeight / 2, 200f);
             //enemies.Add(new testEnemy(Content));
+            bulletManager.loadBulletTextures(Content);
             for (int i = 0; i < 10; i++)
             {
                 BulletA tempBullet = (BulletA)bulletFactory.buildBullet(BulletFactory.BulletType.BulletA);
@@ -59,7 +61,7 @@ namespace BulletHell
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             yorha.Texture = Content.Load<Texture2D>("YorHa");
-            bulletManager.loadBulletTextures(Content);
+            //bulletManager.loadBulletTextures(Content);
             //yorha.addFeatures(Content);
             //foreach (testEnemy testEnemy in enemies)
             //{

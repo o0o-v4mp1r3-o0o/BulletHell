@@ -18,7 +18,7 @@ namespace BulletHell.Model
 
         private BulletFactory()
         {
-            instance = this;
+            
         }
 
         public static BulletFactory GetBulletFactory()
