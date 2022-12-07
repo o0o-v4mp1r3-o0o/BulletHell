@@ -21,7 +21,23 @@ namespace BulletHell.Model
         }
 
 
+        private static BulletManager instance;
         public List<BulletBase> ListOfAllBullets { get => listOfAllBullets; set => listOfAllBullets = value; }
+
+        private BulletManager()
+        {
+            listOfAllBullets = new List<BulletBase>();
+        }
+
+        public static BulletManager GetBulletManager()
+        {
+            if (instance == null)
+            {
+                instance = new BulletManager();
+            }
+            return instance;
+        }
+
 
         public void addBullet(BulletBase bullet)
         {
@@ -46,6 +62,7 @@ namespace BulletHell.Model
                 bullet.update(gameTime);
                 if (yorha.isCollision(bullet))
                 {
+                    System.Diagnostics.Debug.WriteLine("Collision detected!");
                     deadList.Add(bullet);
                     System.Diagnostics.Debug.WriteLine("yo");
                 }
