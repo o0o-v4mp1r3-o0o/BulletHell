@@ -23,7 +23,7 @@ namespace BulletHell.Model
 
         public Texture2D Texture { get => texture; set => texture = value; }
         public float Speed { get => speed; set => speed = value; }
-        public float Direction { get => direction; set => direction = value; }
+        public float Direction { get => direction; set => direction = value * (MathHelper.Pi / 180); }
         public float Distance { get => distance; set => distance = value; }
         public float X { get => x; set => x = value; }
         public float Y { get => y; set => y = value; }

@@ -15,6 +15,11 @@ namespace BulletHell.Model
         public Texture2D BulletA;
         public Texture2D BulletB;
 
+        public BulletManager()
+        {
+            listOfAllBullets = new List<BulletBase>();
+        }
+
 
         public List<BulletBase> ListOfAllBullets { get => listOfAllBullets; set => listOfAllBullets = value; }
 
@@ -42,7 +47,9 @@ namespace BulletHell.Model
                 if (yorha.isCollision(bullet))
                 {
                     deadList.Add(bullet);
+                    System.Diagnostics.Debug.WriteLine("yo");
                 }
+                
             }
         }
 

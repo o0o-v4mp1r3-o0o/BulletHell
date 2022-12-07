@@ -34,14 +34,19 @@ namespace BulletHell
             input.IsGame = true;
             yorha = new YorHa(_graphics.PreferredBackBufferWidth / 2,
             _graphics.PreferredBackBufferHeight / 2, 200f);
+
+            bulletManager = new BulletManager();
+            bulletManager.loadBulletTextures(Content);
             //enemies.Add(new testEnemy(Content));
-            for (int i = 0; i < 10; i++)
+            float c = 0;
+            for (int i = 0; i < 12; i++)
             {
                 BulletA tempBullet = (BulletA)bulletFactory.buildBullet(BulletFactory.BulletType.BulletA);
                 tempBullet.Texture = bulletManager.BulletA;
                 tempBullet.Position = new Vector2(200, 200);
-                tempBullet.Direction = 20f * i;
-                tempBullet.Speed = 10f;
+                tempBullet.Direction = c;
+                c += 30f;
+                tempBullet.Speed = 50f;
                 bulletManager.addBullet(tempBullet);
                 //bulletAList.Add(tempBullet);
             }
@@ -59,7 +64,7 @@ namespace BulletHell
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             yorha.Texture = Content.Load<Texture2D>("YorHa");
-            bulletManager.loadBulletTextures(Content);
+            //bulletManager.loadBulletTextures(Content);
             //yorha.addFeatures(Content);
             //foreach (testEnemy testEnemy in enemies)
             //{
