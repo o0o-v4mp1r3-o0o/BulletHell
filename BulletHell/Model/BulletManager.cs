@@ -15,11 +15,6 @@ namespace BulletHell.Model
         public Texture2D BulletA;
         public Texture2D BulletB;
 
-        public BulletManager()
-        {
-            listOfAllBullets = new List<BulletBase>();
-        }
-
 
         private static BulletManager instance;
         public List<BulletBase> ListOfAllBullets { get => listOfAllBullets; set => listOfAllBullets = value; }

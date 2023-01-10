@@ -35,7 +35,7 @@ namespace BulletHell
             yorha = new YorHa(_graphics.PreferredBackBufferWidth / 2,
             _graphics.PreferredBackBufferHeight / 2, 200f);
 
-            bulletManager = new BulletManager();
+            bulletManager = BulletManager.GetBulletManager();
             bulletManager.loadBulletTextures(Content);
             //enemies.Add(new testEnemy(Content));
             float c = 0;
