@@ -10,17 +10,16 @@ using System.Threading.Tasks;
 
 namespace BulletHell.Model
 {
-    internal class LivingEntity : Entity
+    internal class LivingEntity : Collision
     {
-        private float health;
-        private float firingRate;
-        private float aimDirection;
-        private int team;
+        protected float health;
+        protected float firingRate;
+        protected float aimDirection;
+        protected int team;
         /* Damage doesen't go here.
          * Why?
          * Who owns damage? 
          */
-        //private int damage;
         
         public float Health { get => health; set => health = value; }
         public float FiringRate { get => firingRate; set => firingRate = value; }
@@ -50,7 +49,7 @@ namespace BulletHell.Model
         public void takeDamage(BulletBase bullet)
         {
             Health -= bullet.Damage;
-            System.Diagnostics.Debug.WriteLine("enemy collision!!" + Health + " " + bullet.Damage);
+            //System.Diagnostics.Debug.WriteLine("enemy collision!!" + Health + " " + bullet.Damage);
         }
 
         public void calculateDirection()

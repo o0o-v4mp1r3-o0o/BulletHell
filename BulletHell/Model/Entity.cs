@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace BulletHell.Model
 {
-    internal abstract class Entity : GameObject, Collision
+    internal abstract class Entity : GameObject
     {
-        private Texture2D texture;
-        private float speed;
-        private float direction;
-        private float distance;
-        private float x, y;
-        private bool isDead;
+        protected Texture2D texture;
+        protected float speed;
+        protected float direction;
+        protected float distance;
+        protected float x, y;
+        protected bool isDead;
         // These are given by texture
         //private Rectangle _bounds;
         //private int width, height;
@@ -63,43 +63,43 @@ namespace BulletHell.Model
         //    tempBounds.Y = (int)yPos;
         //    Texture.Bounds = tempBounds;
         //}
-        public bool isCollision(BulletBase bullet)
-        {
-            return Texture.Bounds.Intersects(bullet.Texture.Bounds);
-            //if (isTouchingBottom(bullet) || isTouchingLeft(bullet) || isTouchingRight(bullet) || isTouchingTop(bullet))
-            //{
-            //    System.Diagnostics.Debug.WriteLine("collided!");
-            //    return true;
-            //}
-            //return false;
-        }
-        public bool isTouchingLeft(BulletBase bullet)
-        {
-            return Texture.Bounds.Right > bullet.Texture.Bounds.Left &&
-                Texture.Bounds.Left < bullet.Texture.Bounds.Left &&
-                Texture.Bounds.Bottom > bullet.Texture.Bounds.Top &&
-                Texture.Bounds.Top < bullet.Texture.Bounds.Bottom;
-        }
-        public bool isTouchingRight(BulletBase bullet)
-        {
-            return Texture.Bounds.Left > bullet.Texture.Bounds.Right &&
-                Texture.Bounds.Right < bullet.Texture.Bounds.Right &&
-                Texture.Bounds.Bottom > bullet.Texture.Bounds.Top &&
-                Texture.Bounds.Top < bullet.Texture.Bounds.Bottom;
-        }
-        public bool isTouchingTop(BulletBase bullet)
-        {
-            return Texture.Bounds.Right > bullet.Texture.Bounds.Left &&
-                Texture.Bounds.Left < bullet.Texture.Bounds.Right &&
-                Texture.Bounds.Bottom > bullet.Texture.Bounds.Top &&
-                Texture.Bounds.Top < bullet.Texture.Bounds.Top;
-        }
-        public bool isTouchingBottom(BulletBase bullet)
-        {
-            return Texture.Bounds.Right > bullet.Texture.Bounds.Left &&
-                Texture.Bounds.Left < bullet.Texture.Bounds.Right &&
-                Texture.Bounds.Bottom > bullet.Texture.Bounds.Bottom &&
-                Texture.Bounds.Top < bullet.Texture.Bounds.Bottom;
-        }
+        //public bool isCollision(BulletBase bullet)
+        //{
+        //    return Texture.Bounds.Intersects(bullet.Texture.Bounds);
+        //    //if (isTouchingBottom(bullet) || isTouchingLeft(bullet) || isTouchingRight(bullet) || isTouchingTop(bullet))
+        //    //{
+        //    //    System.Diagnostics.Debug.WriteLine("collided!");
+        //    //    return true;
+        //    //}
+        //    //return false;
+        //}
+        //public bool isTouchingLeft(BulletBase bullet)
+        //{
+        //    return Texture.Bounds.Right > bullet.Texture.Bounds.Left &&
+        //        Texture.Bounds.Left < bullet.Texture.Bounds.Left &&
+        //        Texture.Bounds.Bottom > bullet.Texture.Bounds.Top &&
+        //        Texture.Bounds.Top < bullet.Texture.Bounds.Bottom;
+        //}
+        //public bool isTouchingRight(BulletBase bullet)
+        //{
+        //    return Texture.Bounds.Left > bullet.Texture.Bounds.Right &&
+        //        Texture.Bounds.Right < bullet.Texture.Bounds.Right &&
+        //        Texture.Bounds.Bottom > bullet.Texture.Bounds.Top &&
+        //        Texture.Bounds.Top < bullet.Texture.Bounds.Bottom;
+        //}
+        //public bool isTouchingTop(BulletBase bullet)
+        //{
+        //    return Texture.Bounds.Right > bullet.Texture.Bounds.Left &&
+        //        Texture.Bounds.Left < bullet.Texture.Bounds.Right &&
+        //        Texture.Bounds.Bottom > bullet.Texture.Bounds.Top &&
+        //        Texture.Bounds.Top < bullet.Texture.Bounds.Top;
+        //}
+        //public bool isTouchingBottom(BulletBase bullet)
+        //{
+        //    return Texture.Bounds.Right > bullet.Texture.Bounds.Left &&
+        //        Texture.Bounds.Left < bullet.Texture.Bounds.Right &&
+        //        Texture.Bounds.Bottom > bullet.Texture.Bounds.Bottom &&
+        //        Texture.Bounds.Top < bullet.Texture.Bounds.Bottom;
+        //}
     }
 }

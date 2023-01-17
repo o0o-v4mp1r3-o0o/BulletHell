@@ -35,9 +35,10 @@ namespace BulletHell
             yorha = new YorHa(_graphics.PreferredBackBufferWidth / 2,
             _graphics.PreferredBackBufferHeight / 2, 200f);
 
+            LoadContent();
+
             bulletManager = BulletManager.GetBulletManager();
             bulletManager.loadBulletTextures(Content);
-            //enemies.Add(new testEnemy(Content));
             float c = 0;
             for (int i = 0; i < 12; i++)
             {
@@ -47,6 +48,8 @@ namespace BulletHell
                 tempBullet.Direction = c;
                 c += 30f;
                 tempBullet.Speed = 50f;
+                tempBullet.Team = 1;
+                tempBullet.setBoundsWidthHeight();
                 bulletManager.addBullet(tempBullet);
                 //bulletAList.Add(tempBullet);
             }
@@ -57,6 +60,7 @@ namespace BulletHell
             //    bullets.Add(new Bullet(100f, new Vector2(200, 200), 50f, c,1));
             //    c += 30f;
             //}
+            yorha.setBoundsWidthHeight();
             base.Initialize();
         }
 
@@ -86,10 +90,10 @@ namespace BulletHell
             // TODO: Add your update logic here
             //yorha.input(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight, Content);
             input.inputState(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight, yorha);
-            yorha.update(gameTime, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight, bulletAList, enemies);
+            yorha.update();
 
-            List<BulletBase> deadList = new List<BulletBase>();
-            bulletManager.updateBulletPositions(gameTime, deadList, yorha);
+            bulletManager.updateBulletPositions(gameTime);
+            bulletManager.checkYorhaCollision(yorha);
 
             //foreach (BulletBase bullet in deadList)
             //{

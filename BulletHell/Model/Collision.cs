@@ -1,18 +1,25 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BulletHell.Model;
+using Microsoft.Xna.Framework;
 
-namespace BulletHell.Model
+namespace BulletHell
 {
-    internal interface Collision
+    internal abstract class Collision : Entity
     {
-        public bool isCollision(BulletBase bullet);
-        public bool isTouchingLeft(BulletBase bullet);
-        public bool isTouchingRight(BulletBase bullet);
-        public bool isTouchingTop(BulletBase bullet);
-        public bool isTouchingBottom(BulletBase bullet);
+        public Rectangle _bounds;
+
+        public void updateBounds(float xPos, float yPos)
+        {
+            _bounds.X = (int)xPos;
+            _bounds.Y = (int)yPos;
+        }
+        public bool isCollision(BulletBase bullet)
+        {
+            if (_bounds.Intersects(bullet._bounds))
+            {
+                System.Diagnostics.Debug.WriteLine("Collision Detected!");
+                return true;
+            }
+            return false;
+        }
     }
 }

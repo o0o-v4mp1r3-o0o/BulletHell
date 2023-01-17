@@ -16,19 +16,13 @@ namespace BulletHell.Model
             Position = new Vector2(0.0f, 0.0f);
             Speed = 0.0f;
             Direction = 0.0f;
-            Team = 0;
+            Team = 1;
         }
 
-        public void update(int screenWidth, int screenHeight, BulletA bullet, List<BulletA> bullets)
+        public void setBoundsWidthHeight()
         {
-            calculateDirection();
-            //collision.updateBounds(bulletPosition.X, bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
-            //if (bulletPosition.X > screenWidth || bulletPosition.X < bulletTexture.Width / 2 ||
-            //        bulletPosition.Y > screenHeight || bulletPosition.Y < bulletTexture.Height / 2)
-            //{
-            //    isOffscreen = true;
-            //}
-
+            this._bounds.Width = this.Texture.Width;
+            this._bounds.Height = this.Texture.Height;
         }
 
         /*

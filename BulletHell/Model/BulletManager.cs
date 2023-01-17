@@ -12,16 +12,22 @@ namespace BulletHell.Model
     internal class BulletManager
     {
         private List<BulletBase> listOfAllBullets;
+        private List<BulletBase> listOfEnemyBullets;
+        private List<BulletBase> listOfDeadBullets;
         public Texture2D BulletA;
         public Texture2D BulletB;
 
 
         private static BulletManager instance;
         public List<BulletBase> ListOfAllBullets { get => listOfAllBullets; set => listOfAllBullets = value; }
+        public List<BulletBase> ListOfEnemyBullets { get => listOfAllBullets; set => listOfAllBullets = value; }
+        public List<BulletBase> ListOfDeadBullets { get => listOfAllBullets; set => listOfAllBullets = value; }
 
         private BulletManager()
         {
             listOfAllBullets = new List<BulletBase>();
+            listOfEnemyBullets = new List<BulletBase>();
+            listOfDeadBullets = new List<BulletBase>();
         }
 
         public static BulletManager GetBulletManager()
@@ -33,35 +39,56 @@ namespace BulletHell.Model
             return instance;
         }
 
+        public void checkYorhaCollision(YorHa yorha)
+        {
+            foreach (BulletBase b in listOfEnemyBullets)
+            {
+                if (yorha.isCollision(b))
+                {
+                    yorha.takeDamage(b);
+                    ListOfDeadBullets.Add(b);
+                }
+            }
+        }
+
 
         public void addBullet(BulletBase bullet)
         {
             listOfAllBullets.Add(bullet);
-        }
-
-        public void removeBullet(BulletBase bullet)
-        {
-            listOfAllBullets.Remove(bullet);
+            if (bullet.Team != 0)
+            {
+                listOfEnemyBullets.Add(bullet);
+            }
         }
 
         public void clearBullets()
         {
             listOfAllBullets.Clear();
         }
-
-        public void updateBulletPositions(GameTime gameTime, List<BulletBase> deadList, YorHa yorha)
+        public void clearEnemyBullets()
         {
+            listOfEnemyBullets.Clear();
+        }
 
+        public void checkDeadBullets()
+        {
+            foreach (BulletBase b in listOfDeadBullets)
+            {
+                System.Diagnostics.Debug.WriteLine("Dead bullet Detected!");
+                if (b.Team != 0)
+                {
+                    ListOfEnemyBullets.Remove(b);
+                }
+                ListOfAllBullets.Remove(b);
+            }
+        }
+
+        public void updateBulletPositions(GameTime gameTime)
+        {
+            checkDeadBullets();
             foreach (BulletBase bullet in ListOfAllBullets)
             {
                 bullet.update(gameTime);
-                if (yorha.isCollision(bullet))
-                {
-                    System.Diagnostics.Debug.WriteLine("Collision detected!");
-                    deadList.Add(bullet);
-                    System.Diagnostics.Debug.WriteLine("yo");
-                }
-                
             }
         }
 
@@ -78,8 +105,5 @@ namespace BulletHell.Model
             BulletA = content.Load<Texture2D>("bulletreal");
             BulletB = content.Load<Texture2D>("YorHaBullet");
         }
-
-
-
     }
 }

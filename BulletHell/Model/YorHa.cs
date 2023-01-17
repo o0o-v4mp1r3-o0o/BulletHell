@@ -25,6 +25,12 @@ namespace BulletHell.Model
             X = XLocation;
             Y = YLocation;
         }
+
+        public void setBoundsWidthHeight()
+        {
+            this._bounds.Width = this.Texture.Width;
+            this._bounds.Height = this.Texture.Height;
+        }
         //public void addFeatures(ContentManager Content)
         //{
         //    collision = new Collision(yorhaPosition.X, yorhaPosition.Y, yorhaTexture.Width, yorhaTexture.Height);
@@ -64,8 +70,10 @@ namespace BulletHell.Model
         //    }
         //}
 
-        public void update(GameTime gameTime, int screenWidth, int screenHeight, List<BulletA> bullets, List<LivingEntity> enemies)
+        public void update()
         {
+            updateBounds(this.Position.X, this.Position.Y);
+
             //collision.updateBounds(yorhaPosition.X, yorhaPosition.Y, yorhaTexture.Width, yorhaTexture.Height);
             //for(int i = 0; i < firedBullets.Count; i++)
             //{

@@ -17,9 +17,14 @@ namespace BulletHell.Model
             Position = new Vector2(0.0f, 0.0f);
             Speed = 0.0f;
             Direction = 0.0f;
-            Team = 0;
+            Team = 1;
         }
 
+        public void setBoundsWidthHeight()
+        {
+            this._bounds.Width = this.Texture.Width;
+            this._bounds.Height = this.Texture.Height;
+        }
         //public void update(int screenWidth, int screenHeight, BulletA bullet, List<BulletA> bullets)
         //{
         //    //collision.updateBounds(bulletPosition.X, bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);

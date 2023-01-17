@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace BulletHell.Model
 {
-    internal abstract class BulletBase : Entity
+    internal abstract class BulletBase : Collision
     {
         private float damage;
         private bool isOffscreen;
@@ -21,20 +21,10 @@ namespace BulletHell.Model
 
         public override void update(GameTime gameTime)
         {
-            //collision.updateBounds(bulletPosition.X, bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
-            //if (bulletPosition.X > screenWidth || bulletPosition.X < bulletTexture.Width / 2 ||
-            //        bulletPosition.Y > screenHeight || bulletPosition.Y < bulletTexture.Height / 2)
-            //{
-            //    isOffscreen = true;
-            //}
             calculateDirection();
             travelDirection(gameTime);
+            updateBounds(Position.X, Position.Y);
         }
-        //public void draw(SpriteBatch _spriteBatch)
-        //{
-        //    _spriteBatch.Draw(
-        //    Texture, Position, null, Color.White, 0f, new Vector2(Texture.Width / 2, Texture.Height / 2), Vector2.One, SpriteEffects.None, 0f);
-        //}
 
         public void travelDirection(GameTime gameTime)
         {
@@ -67,15 +57,5 @@ namespace BulletHell.Model
                 Y = (float)Math.Sin(360 - Direction) * Speed;
             }
         }
-
-        //public void destroySelf(BulletA bullet, List<BulletA> bullets)
-        //{
-        //    bullets.Remove(bullet);
-        //    bullet = null;
-        //}
-        //public bool isOnSameTeam(BulletA bullet1, BulletA bullet2)
-        //{
-        //    return bullet1.BulletTeam == bullet2.BulletTeam;
-        //}
     }
 }
