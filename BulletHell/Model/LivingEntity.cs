@@ -46,12 +46,6 @@ namespace BulletHell.Model
             //}
         }
 
-        public void takeDamage(BulletBase bullet)
-        {
-            Health -= bullet.Damage;
-            //System.Diagnostics.Debug.WriteLine("enemy collision!!" + Health + " " + bullet.Damage);
-        }
-
         public void calculateDirection()
         {
 

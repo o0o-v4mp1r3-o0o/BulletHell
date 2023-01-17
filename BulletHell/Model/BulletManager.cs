@@ -46,7 +46,7 @@ namespace BulletHell.Model
                 if (yorha.isCollision(b))
                 {
                     yorha.takeDamage(b);
-                    ListOfDeadBullets.Add(b);
+                    listOfDeadBullets.Add(b);
                 }
             }
         }
@@ -74,7 +74,6 @@ namespace BulletHell.Model
         {
             foreach (BulletBase b in listOfDeadBullets)
             {
-                System.Diagnostics.Debug.WriteLine("Dead bullet Detected!");
                 if (b.Team != 0)
                 {
                     ListOfEnemyBullets.Remove(b);
